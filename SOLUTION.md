@@ -18,3 +18,7 @@ public static IQueryable<TodoList> RelevantTodoLists(this ApplicationDbContext d
 ```
 
 Since in task 6 is not written to block modification of list which user is only responsible party id I will skip that and assume that user may modify whole list.
+
+I also changed here display name for responsible party id as I more understood what does actually mean.
+
+3. For task 7 I skipped `Rank` in constructor as we always set it to 0, because we only set `Rank` in edit page.
