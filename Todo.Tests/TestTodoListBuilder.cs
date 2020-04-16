@@ -32,6 +32,7 @@ namespace Todo.Tests
             var todoItems = items.Select(itm =>
             {
                 var item = new TodoItem(todoList.TodoListId, owner.Id, itm.Item1, itm.Item2);
+                item.ResponsibleParty = owner;
                 item.Rank = itm.Item3;
 
                 return item;
