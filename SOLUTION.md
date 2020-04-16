@@ -1,0 +1,1 @@
+1. Replace `<s>` tags with `<del>` as [the `<s>` tag should not be used to define replaced or deleted text, use the `<del>` tag to define replaced or deleted text.](https://www.w3schools.com/tags/tag_s.asp)

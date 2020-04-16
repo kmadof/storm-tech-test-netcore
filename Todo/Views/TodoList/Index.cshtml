@@ -20,9 +20,9 @@
             <li class="list-group-item">
                 @if (list.NumberOfNotDoneItems == 0)
                 {
-                    <s>
+                    <del>
                         <a asp-action="Detail" asp-route-todoListId="@list.TodoListId">@list.Title</a>
-                    </s>
+                    </del>
                 }
                 else
                 {
