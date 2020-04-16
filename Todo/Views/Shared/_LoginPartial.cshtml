@@ -19,9 +19,11 @@
                         var iu = await UserManager.GetUserAsync(User);
                         var emailAddress = await UserManager.GetEmailAsync(iu);
                         var gravatarhash = Gravatar.GetHash(emailAddress);
+                        var userName = Gravatar.GetUserName(gravatarhash);
                     }
 
                     <img src="https://www.gravatar.com/avatar/@gravatarhash?s=30" />
+                    @userName
                     @UserManager.GetUserName(User)
                 </a>
             </li>
