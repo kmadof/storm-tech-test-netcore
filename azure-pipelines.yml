@@ -56,6 +56,9 @@ steps:
     searchFolder: '$(System.DefaultWorkingDirectory)'
     codeCoverageEnabled: true
 
+
+- script: ls '$(Agent.TempDirectory)/TestResults/'
+
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:
