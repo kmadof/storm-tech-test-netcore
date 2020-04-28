@@ -56,8 +56,7 @@ steps:
     searchFolder: '$(System.DefaultWorkingDirectory)'
     codeCoverageEnabled: true
 
-
-- script: dir '$(Agent.TempDirectory)\TestResults\' /s
+- pwsh: Get-ChildItem -Path '$(Agent.TempDirectory)\TestResults' –Recurse
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
