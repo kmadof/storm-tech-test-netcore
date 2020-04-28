@@ -57,7 +57,7 @@ steps:
     codeCoverageEnabled: true
 
 
-- script: ls '$(Agent.TempDirectory)/TestResults/'
+- script: dir '$(Agent.TempDirectory)/TestResults/' /s
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
