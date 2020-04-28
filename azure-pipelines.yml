@@ -35,27 +35,39 @@ steps:
     projects: '$(Build.SourcesDirectory)/Todo.sln'
     arguments: '--configuration $(buildConfiguration)'
 
+
+
 # You just added coverlet.collector to use 'XPlat Code Coverage'
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: '*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- RunConfiguration.DisableAppDomain=true'
-    workingDirectory: $(Build.SourcesDirectory)
+# - task: DotNetCoreCLI@2
+#   displayName: Test
+#   inputs:
+#     command: test
+#     projects: '*Tests/*.csproj'
+#     arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- RunConfiguration.DisableAppDomain=true'
+#     workingDirectory: $(Build.SourcesDirectory)
 
-- task: DotNetCoreCLI@2
+- task: VSTest@2
   inputs:
-    command: custom
-    custom: tool
-    arguments: install --tool-path . dotnet-reportgenerator-globaltool
-  displayName: Install ReportGenerator tool
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    codeCoverageEnabled: true
 
-- script: ./reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
-  displayName: Create reports
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: custom
+#     custom: tool
+#     arguments: install --tool-path . dotnet-reportgenerator-globaltool
+#   displayName: Install ReportGenerator tool
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
+# - script: ./reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
+#   displayName: Create reports
+
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'Publish code coverage'
+#   inputs:
+#     codeCoverageTool: Cobertura
+#     summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
